@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @airport.name
+
+= link_to 'Edit', edit_airport_path(@airport)
+\|
+= link_to 'Back', airports_path

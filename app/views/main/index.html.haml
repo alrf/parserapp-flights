@@ -1,0 +1,47 @@
+%div{:style => 'text-align: center;'}
+  %h1 Парсер данных туроператора
+  %h3 Москва - Турция
+  = @url
+  = form_tag("/", :method => "post")
+  %p
+    %input{:type => 'date', :name => 'date_start', :value => Date.today()}
+    %input{:type => 'date', :name => 'date_stop', :value => Date.today() + 2.days}
+
+  = radio_button_tag 'format', 'html', true
+  = label_tag 'format_html', 'HTML'
+
+  = radio_button_tag 'format', 'xml'
+  = label_tag 'format_xml', 'XML'
+
+  = radio_button_tag 'format', 'json'
+  = label_tag 'format_json', 'JSON'
+
+  %p
+    = submit_tag "Парсить", :disable_with => "Подождите..."
+
+
+-#%p
+-#  = raw @rr
+
+-#- unless @rr.nil?
+-#  %p
+-#    parse data
+-#    %table
+-#      - @rr.each do |el|
+-#        -#%tr
+-#        -#  %td= el
+-#        %tr
+-#          %td= el[0].split[0] + ' ' + el[1] + ' ' + el[4] + '-' + el[6] + ' ' + el[8]
+-#        %tr
+-#          %td= el[0].split[0] + ' ' + el[9] + ' ' + el[12] + '-' + el[14] + ' ' + el[16]
+
+
+- unless @arr.nil?
+  %p
+    %table{:class => 'tmain'}
+      - @arr.each do |el|
+        %tr
+          %td= el.date
+          %td= el.fl
+          %td= el.from_airport.name + '-' + el.to_airport.name
+          %td= el.econom

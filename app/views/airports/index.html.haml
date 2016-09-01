@@ -1,0 +1,19 @@
+%h1 Listing airports
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @airports.each do |airport|
+    %tr
+      %td= airport.name
+      %td= link_to 'Show', airport
+      %td= link_to 'Edit', edit_airport_path(airport)
+      %td= link_to 'Destroy', airport, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Airport', new_airport_path

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @flight.date
+%p
+  %b Flight:
+  = @flight.fl
+%p
+  %b Departure airport:
+  = @flight.departure_airport
+%p
+  %b Arrival airport:
+  = @flight.arrival_airport
+%p
+  %b Econom:
+  = @flight.econom
+
+= link_to 'Edit', edit_flight_path(@flight)
+\|
+= link_to 'Back', flights_path

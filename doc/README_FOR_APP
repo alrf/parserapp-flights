@@ -1,0 +1,46 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+
+Необходимо реализовать отдельным приложением парсер данных о чартерных рейсах с сайтов туроператоров, на ваш выбор:
+
+Лабиринт - http://online.labirint.travel/freight_monitor (Греция; город прибытия - KOS)
+NEC Travel - http://online.nectravel.ru/freight_monitor (Турция; город прибытия - ISTANBUL)
+
+
+Нажатие кнопки "Парсить":
+
+Осуществляет запрос к туроператору
+Парсит информацию из полученной таблицы только в пределах заданных в календариках дат
+В зависимости от выбранной радиокнопки (xml/json/html) выводит результаты парсинга в выбранном формате
+
+
+Требования к заданию
+В качестве БД для задания использовать либо sqlite либо mysql. NoSQL не нужно.
+Считаем, что в системе обязательно будут присутствовать сущности: Рейс и Аэропорт
+Готовое приложение должно иметь покрытие тестами, хотя бы с помощью RSpec.
+Для запросов использовать gem 'rest-client'
+Для тестов правильности парсинга и запросов на сайт оператора использовать gem 'webmock'
+Шаблонизатор для вьюх - HAML
+В зависимости от выбранного значения радио-кнопок выдавать ответ в HTML, XML и JSON вариантах. Для отработки всего этого добра использовать gem 'rabl'
+
+
+Подсказки
+Flight.rb:
+belongs_to  :departure_airport,   :class_name => "Airport"
+belongs_to  :arrival_airport,     :class_name => "Airport"
+
+
+Не нужно тестировать фронтэнд. Важно протестировать класс парсера, правильное формирование запросов к внешнему сервису и замокать ответы от туроператора.
+
+
+Не удалось сделать через миграции, таблица нужна с ключами (foreign key), gem 'foreigner' не помог (похоже не поддерживаются foreign key для sqlite3)
+Удаление таблицы flights:
+# sqlite3 db/development.sqlite3 "drop table flights;"
+
+Создание таблицы flights:
+# sqlite3 db/development.sqlite3 'CREATE TABLE "flights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "date" varchar(255), "fl" varchar(255), "departure_airport" integer, "arrival_airport" integer, "econom" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, FOREIGN KEY (departure_airport) REFERENCES airports(id), FOREIGN KEY (arrival_airport) REFERENCES airports(id));'
+
+
+Тесты в main_controller_spec.rb:
+# rspec spec/controllers/main_controller_spec.rb

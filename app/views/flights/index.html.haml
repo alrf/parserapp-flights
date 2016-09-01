@@ -1,0 +1,29 @@
+%h1 Listing flights
+
+%table
+  %tr
+    %th Date
+    %th Flight
+    %th Departure airport
+    %th Arrival airport
+    %th Econom
+    %th
+    %th
+    %th
+
+  - @flights.each do |flight|
+    %tr
+      %td= flight.date
+      %td= flight.fl
+      - #%td= flight.departure_airport
+      - #%td= flight.arrival_airport
+      %td= flight.from_airport.name
+      %td= flight.to_airport.name
+      %td= flight.econom
+      %td= link_to 'Show', flight
+      %td= link_to 'Edit', edit_flight_path(flight)
+      %td= link_to 'Destroy', flight, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Flight', new_flight_path
