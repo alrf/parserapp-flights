@@ -1,7 +1,7 @@
 == Application-parser
 
 Application-parser for parsing charter flights from tour-operators websites.
-gem 'rest-client' - for requests to websites.
-gem 'webmock' - for tests results of the parsing and requests.
+Gem 'rest-client' - for requests to websites.
+Gem 'webmock' - for tests results of the parsing and requests.
 HAML - for views.
-gem 'rabl' - for showing parsing results in HTML/XML/JSON formats.
+Gem 'rabl' - for showing parsing results in HTML/XML/JSON formats.
